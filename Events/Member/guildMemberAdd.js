@@ -9,8 +9,14 @@ module.exports = {
   execute(member) {
     const { user, guild } = member;
 
-    member.roles.add("984964189665755206");
+    if(guild.id == "981362646081232956")
+      if(member.id == "969678655297044511") {
+        member.roles.add("1000602660996649010");
+        return
+      }
 
+    member.roles.add("984964189665755206")
+    
     const Welcomer = new WebhookClient({
       id: "1006658288051568681",
       token:

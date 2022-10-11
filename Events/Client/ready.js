@@ -1,6 +1,6 @@
 const { Client, ActivityType } = require ("discord.js");
 
-let activities = [`L+Bozo+Ratio`, `Fortnut`, `With d Bois`, `this idiotic loser life`, `with the unvierse`, `halo infinite`]
+let activities = [`Danx3mer.github.io`]
   ,i = 0;
 
 module.exports = {
@@ -14,6 +14,6 @@ module.exports = {
    console.log(`client is now logged in as ${client.user.username}`)
      
    setInterval(() => client.user.setPresence({
-     activities: [{ name: `${activities[i++ % activities.length]}`, type: ActivityType.Playing }], status: 'dnd'}), 5000);
+     activities: [{ name: `${activities[i++ % activities.length]}`, type: ActivityType.Watching }], status: 'dnd'}), 5000);
  }
 };

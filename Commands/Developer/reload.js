@@ -1,12 +1,13 @@
 const {
   PermissionFlagsBits,
-  EmbedBuilder,
   SlashCommandBuilder,
-  ChatInputCommandInteraction,
+  ChatInputCommandInteraction
 } = require("discord.js");
 
 const { loadCommands } = require("../../Handlers/commandHandler.js");
 const { loadEvents } = require("../../Handlers/eventHandler.js");
+const { loadComponents } = require("../../Handlers/componentHandler.js");
+const createEmbed = require("../../Tools/Embed.js")
 
 module.exports = {
   developer: true,
@@ -21,6 +22,10 @@ module.exports = {
 
     .addSubcommand((options) =>
       options.setName("commands").setDescription("Reload your command handler.")
+    )
+    
+    .addSubcommand((options) =>
+      options.setName("components").setDescription("Reload your component handler.")
     ),
 
   /**
@@ -33,21 +38,24 @@ module.exports = {
       case "events":
         {
           loadEvents(client);
+          console.log('The event handler has been reloaded')
           return interaction.reply({
-            embeds: [
-              new EmbedBuilder()
-              .setTitle("RELOADED!")
-              .setDescription("The event handler has been reloaded!")]});
+            embeds: [createEmbed("The event handler has been reloaded!", "RELOADED!")]});
         }
       case "commands":
         {
           loadCommands(client);
+          console.log('The command handler has been reloaded')
           return interaction.reply({
-            embeds: [
-              new EmbedBuilder()
-              .setTitle("RELOADED!")
-              .setDescription("The command handler has been reloaded!")]});
+            embeds: [createEmbed("The command handler has been reloaded!", "RELOADED!")]});
+        }
+      case "components":
+        {
+          loadComponents(client);
+          console.log('The component handler has been reloaded')
+          return interaction.reply({
+            embeds: [createEmbed("The component handler has been reloaded!", "RELOADED!")]});
         }
     }
-  },
+  }
 };

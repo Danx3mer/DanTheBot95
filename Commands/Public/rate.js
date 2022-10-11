@@ -1,8 +1,9 @@
 const {
   SlashCommandBuilder,
-  ChatInputCommandInteraction,
-  EmbedBuilder,
+  ChatInputCommandInteraction
 } = require("discord.js");
+
+const createEmbed = require("../../Tools/Embed.js")
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -30,45 +31,27 @@ module.exports = {
    * @param {ChatInputCommandInteraction} interaction
    */
   execute(interaction) {
-    const embed = new EmbedBuilder();
     switch (interaction.options.getSubcommand()) {
       case "brain":
         {
-          embed
-            .setTitle("Brain Ratings:")
-            .setDescription(
-              "You have " +
-                (Math.floor(Math.random() * 101) + 1) +
-                " brain cells !!!"
-            );
           interaction.reply({
-            embeds: [embed],
+            embeds: [createEmbed("You have " + (Math.floor(Math.random() * 101) + 1) + " brain cells !!!", "Brain Ratings:", "", "How're you so smart? I have -5 :/")],
           });
         }
         break;
+        
       case "howpog":
         {
-          embed
-            .setTitle("Pog Ratings:")
-            .setDescription(
-              "You are " + (Math.floor(Math.random() * 100) + 1) + "% pog !!!"
-            );
           interaction.reply({
-            embeds: [embed],
+            embeds: [createEmbed("You are " + (Math.floor(Math.random() * 100) + 1) + "% pog !!!" ,"Pog Ratings:")],
           });
         }
         break;
+        
       case "epicgamer":
         {
-          embed
-            .setTitle("Epic Gamer Ratings:")
-            .setDescription(
-              "You are " +
-                (Math.floor(Math.random() * 100) + 1) +
-                "% Epic gamer :sunglasses:"
-            ),
             interaction.reply({
-              embeds: [embed],
+              embeds: [createEmbed("You are " + (Math.floor(Math.random() * 100) + 1) + "% Epic gamer :sunglasses:", "Epic Gamer Ratings:")],
             });
         }
         break;

@@ -14,15 +14,20 @@ function loadCommands(client) {
       .filter((file) => file.endsWith(".js"));
 
     for (const file of commandFiles) {
-      ++totalNumCommands
       const commandFile = require(`../Commands/${folder}/${file}`);
-
+	if(commandFile.inDev) continue
+      else ++totalNumCommands
       client.commands.set(commandFile.data.name, commandFile);
 
-      if (commandFile.developer) developerArray.push(commandFile.data.toJSON());
-      else commandsArray.push(commandFile.data.toJSON());
+      if (commandFile.developer){
+		  developerArray.push(commandFile.data.toJSON());
+      	table.addRow(file, "🟡 In Developer Mode");
+	  }
+      else {
+		  commandsArray.push(commandFile.data.toJSON());
+      table.addRow(file, "🟢 Public!");
+	  }
 
-      table.addRow(file, "Online!");
       continue;
     }
   }
