@@ -6,8 +6,6 @@ const {
 const createEmbed = require("../../Tools/Embed.js")
 
 module.exports = {
-	//inDev: true,
-	developer: true,
   data: new SlashCommandBuilder()
     .setName("timeout")
     .setDescription("timeout a member.")
@@ -40,7 +38,7 @@ module.exports = {
 		  await member.timeout(time * 60 * 1000, reason);
 		  
 		  	interaction.reply({
-			  embeds: [createEmbed(`${user.tag} has been timed out!`, "TIMEOUT!!!","","don\'t end up like them!")]
+			  embeds: [createEmbed(`${user.tag} has been timed out! Reason: ${reason}`, "TIMEOUT!!!","","don\'t end up like them!")]
 		  })
 	  } catch(e) {
 		  interaction.reply({

@@ -6,19 +6,17 @@ const {
 const createEmbed = require("../../Tools/Embed.js")
 
 module.exports = {
-	//inDev: true,
-	developer: true,
   data: new SlashCommandBuilder()
-    .setName("ban")
-    .setDescription("Bans a member.")
+    .setName("kick")
+    .setDescription("Kicks a member.")
 	.addUserOption(option => 
 		option.setName('member')
-		.setDescription("The member to be banned.")
+		.setDescription("The member to be kicked.")
 		.setRequired(true))
 	  
 	.addStringOption(option =>
 		option.setName('reason')
-		.setDescription('The reason that you want to ban the member.')),
+		.setDescription('The reason that you want to kick the member.')),
 	/**
    *
    * @param {CommandInteraction} interaction
@@ -30,15 +28,13 @@ module.exports = {
 		  .fetch(user.id)
 		  .catch(console.error)
 	  try {
-		  await member.ban({
-			  deleteMessageDays: 0,
-			  reason: reason });
+		  await member.kick(reason);
 		  interaction.reply({
-			  embeds: [createEmbed(`${user.tag} has been banned!`, "BAN!!!","","don\'t end up like them!")]
+			  embeds: [createEmbed(`${user.tag} has been kicked! Reason: ${reason}`, "KICK!!!","","don\'t end up like them!")]
 		  })
 	  } catch(e) {
 		  interaction.reply({
-			  embeds: [createEmbed(`${user.tag} couldn't be banned!`, "Ban Error!!!","",":/")]
+			  embeds: [createEmbed(`${user.tag} couldn't be kicked!`, "Kick Error!!!","",":/")]
 		  })
 	  }
   },
