@@ -15,13 +15,17 @@ function loadCommands(client) {
 
     for (const file of commandFiles) {
       const commandFile = require(`../Commands/${folder}/${file}`);
-	if(commandFile.inDev) continue
+	if(commandFile.inDev) {
+		if(folder == "Generic_Test_Other") table.addRow(file, "🔵 Generic (Never gonna be released)");
+		else table.addRow(file, "🔴 Indev (Not released at all)");
+		continue
+	}
       else ++totalNumCommands
       client.commands.set(commandFile.data.name, commandFile);
 
       if (commandFile.developer){
 		  developerArray.push(commandFile.data.toJSON());
-      	table.addRow(file, "🟡 In Developer Mode");
+      	table.addRow(file, "🟡 In Testing Mode (Only available on dev servers)");
 	  }
       else {
 		  commandsArray.push(commandFile.data.toJSON());
