@@ -34,6 +34,7 @@ module.exports = {
   * @param {Client} client
   */
   execute(interaction, client) {
+	  if(interaction.member.id != client.config.owner) return interaction.reply("WHAT THE HELL ARE YOU TRYING TO DO??? YOU'RE NOT DAN!")
     switch (interaction.options.getSubcommand()) {
       case "events":
         {
