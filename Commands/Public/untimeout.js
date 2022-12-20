@@ -1,6 +1,7 @@
 const {
   SlashCommandBuilder,
-  CommandInteraction
+  CommandInteraction,
+	PermissionFlagsBits
 } = require("discord.js");
 
 const createEmbed = require("../../Tools/Embed.js")
@@ -9,7 +10,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("untimeout")
     .setDescription("removes timeout from an already timed out member.")
-	  
+	  .setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild)
 	.addUserOption(option => 
 		option.setName('member')
 		.setDescription("The member to be timed out.")

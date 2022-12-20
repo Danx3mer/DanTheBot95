@@ -21,9 +21,16 @@ module.exports = {
     else if(interaction.isButton()) {
       const { buttons } = client
       const { customId } = interaction
-      const button = buttons.get(customId)
-      if(!button) return console.log("ERROR: THERE IS NO CODE FOR THIS BUTTON")
 
+			if (!customId.endsWith(interaction.user.id)) {
+  return interaction.reply({
+    content: "This button is not for you",
+    ephemeral: true
+  })
+}
+			let newCustomId=customId.toString().replace(interaction.user.id.toString(), '');
+      const button = buttons.get(newCustomId)
+      if(!button) return console.log("ERROR: THERE IS NO CODE FOR THIS BUTTON")
       try {
         button.execute(interaction, client)
       } catch(e) { console.error(e) }

@@ -11,9 +11,11 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("unlock")
 		.setDescription("Unlocks the specified channel so that everyone can type.")
+		.setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild)
 		.addChannelOption(option =>
 			option.setName('channel')
 				.setDescription('The channel that you want to unlock.')),
+	
 	/**
    *
    * @param {CommandInteraction} interaction

@@ -15,6 +15,9 @@ module.exports = (Description, Title = "", Author= "", Footer= "", Color = Color
     embed.setImage(Image)
   } catch(e) { if(Image != "") console.log( `INVALID IMAGE! ERROR: ${e}` ) }
   
-  if(Fields != null) embed.addFields(Fields)
+  if(Fields != null) 
+		for(let i = 0; i < Fields.length; i++){
+			embed.addFields(Fields[i]) 
+		}
   return embed;
 }

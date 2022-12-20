@@ -8,7 +8,7 @@ const createEmbed = require("../../Tools/Embed.js")
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("ping")
-    .setDescription("Pong!"),
+    .setDescription("Gives you information about the status of the bot."),
   /**
    *
    * @param {CommandInteraction} interaction
@@ -16,8 +16,7 @@ module.exports = {
   execute(interaction) {
     interaction.channel.send("Pinging...").then((pingBoi) => {
       pingBoi.delete();
-      interaction.deferReply()
-      interaction.editReply({ embeds: [
+      interaction.reply({ embeds: [
         createEmbed(`Bot ping is: ${pingBoi.createdTimestamp - interaction.createdTimestamp} ms.`, "Ping: ")] });
     });
   },
