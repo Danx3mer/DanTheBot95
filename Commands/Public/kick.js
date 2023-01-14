@@ -1,6 +1,8 @@
 const {
   SlashCommandBuilder,
-  CommandInteraction
+  CommandInteraction,
+	Colors,
+	PermissionFlagsBits
 } = require("discord.js");
 
 const createEmbed = require("../../Tools/Embed.js")
@@ -9,6 +11,8 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("kick")
     .setDescription("Kicks a member.")
+		.setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild)
+		
 	.addUserOption(option => 
 		option.setName('member')
 		.setDescription("The member to be kicked.")
@@ -34,7 +38,7 @@ module.exports = {
 		  })
 	  } catch(e) {
 		  interaction.reply({
-			  embeds: [createEmbed(`${user.tag} couldn't be kicked!`, "Kick Error!!!","",":/")]
+			  embeds: [createEmbed(`${user.tag} couldn't be kicked!`, "Kick Error!!!","",":/", Colors.Yellow)]
 		  })
 	  }
   },

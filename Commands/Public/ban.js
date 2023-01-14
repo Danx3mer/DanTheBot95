@@ -1,6 +1,8 @@
 const {
   SlashCommandBuilder,
-  CommandInteraction
+  CommandInteraction,
+	Colors,
+	PermissionFlagsBits
 } = require("discord.js");
 
 const createEmbed = require("../../Tools/Embed.js")
@@ -9,6 +11,8 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("ban")
     .setDescription("Bans a member.")
+		.setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild)
+		
 	.addUserOption(option => 
 		option.setName('member')
 		.setDescription("The member to be banned.")
@@ -36,7 +40,7 @@ module.exports = {
 		  })
 	  } catch(e) {
 		  interaction.reply({
-			  embeds: [createEmbed(`${user.tag} couldn't be banned!`, "Ban Error!!!","",":/")]
+			  embeds: [createEmbed(`${user.tag} couldn't be banned!`, "Ban Error!!!","",":/",Colors.Red)]
 		  })
 	  }
   },

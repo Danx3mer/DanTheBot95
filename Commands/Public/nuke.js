@@ -23,6 +23,6 @@ module.exports = {
         { embeds: [
         createEmbed(`THIS ACTION IS IRREVERSIBLE!!!`, "ARE YOU SURE THAT YOU WANT TO NUKE THIS CHANNEL?", "", "WARNING!!! THIS WILL DELETE THE WHOLE CHANNEL. THIS IS IRREVERSIBLE!!!")], 
          
-         components: [new ActionRowBuilder().addComponents(createButton("100% YES", "NukeYes",ButtonStyle.Danger),createButton("NO!!!", "NukeNo",ButtonStyle.Success))]});
+         components: [new ActionRowBuilder().addComponents(createButton("100% YES", "NukeYes",interaction.user.id,ButtonStyle.Danger),createButton("NO!!!", "NukeNo",interaction.user.id,ButtonStyle.Success))]});
     }
 };

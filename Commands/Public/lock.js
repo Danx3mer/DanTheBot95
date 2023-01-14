@@ -11,6 +11,7 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("lock")
 		.setDescription("Locks the specified channel so that only moderators can type.")
+		.setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild)
 		.addChannelOption(option =>
 			option.setName('channel')
 				.setDescription('The channel that you want to lock down.'))
