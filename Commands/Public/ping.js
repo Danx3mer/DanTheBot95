@@ -4,6 +4,7 @@ const {
 } = require("discord.js");
 
 const createEmbed = require("../../Tools/Embed.js")
+const readFromJson = require("../../Tools/ReadJson.js")
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -14,10 +15,12 @@ module.exports = {
    * @param {CommandInteraction} interaction
    */
   execute(interaction) {
+		const version = readFromJson("../config.json", "version")
+		
     interaction.channel.send("Pinging...").then((pingBoi) => {
       pingBoi.delete();
       interaction.reply({ embeds: [
-        createEmbed(`Bot ping is: ${pingBoi.createdTimestamp - interaction.createdTimestamp} ms.`, "Ping: ")] });
+        createEmbed(`Bot ping is: ${pingBoi.createdTimestamp - interaction.createdTimestamp} ms.`, "Ping: ", "", `Bot Version: ${version}`)] });
     });
   },
 };
