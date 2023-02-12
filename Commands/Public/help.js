@@ -8,7 +8,6 @@ const createEmbed = require("../../Tools/Embed.js")
 const readFromJson = require("../../Tools/ReadJson.js")
 
 module.exports = {
-	developer: true,
 	data: new SlashCommandBuilder()
 		.setName("help")
 		.setDescription("Tells you information about all of the commands in the bot"),

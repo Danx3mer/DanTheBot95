@@ -20,11 +20,15 @@ module.exports = {
 			activities: [{ name: `${activities[i++ % activities.length]}`, type: ActivityType.Watching }], status: 'dnd'
 		}), 5000);
 
-		jsonWrite(client.config, './config.json', "timesStarted", ++client.config["timesStarted"])
-		client.channels.cache.get(client.config.statusChannel)
-			.send({
-				embeds: [createEmbed(`I HAVE BEEN REINCARNATED ${client.config["timesStarted"]} TIMES`, "ITS ALIVE!!!", "", "Oh No.", Colors.Red)
-				]
-			})
+		jsonWrite('./config.json', "timesStarted", ++client.config["timesStarted"])
+		try {
+			client.channels.cache.get(client.config.statusChannel)
+				.send({
+					embeds: [createEmbed(`I HAVE BEEN REINCARNATED ${client.config["timesStarted"]} TIMES`, "ITS ALIVE!!!", "", "Oh No.", Colors.Red)
+					]
+				})
+		} catch (e) {
+			console.log("ERROR: BOT IS NOT IN TESTING SERVER ")
+		}
 	}
 };

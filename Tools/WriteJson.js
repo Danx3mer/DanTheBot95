@@ -1,8 +1,11 @@
-module.exports = (json, filePath, nameOfVar, newValue) => {
+module.exports = (filePath, nameOfVar, newValue) => {
+	const fs = require('fs')
+	
+	const contentOfJson = fs.readFileSync(filePath)
+
+	let json = JSON.parse(contentOfJson);
 	json[nameOfVar] = newValue
-	
-	var fs = require('fs')
-	
+
 	fs.writeFile(filePath, JSON.stringify(json, null, 2), (err) => {
 		if (err) console.log('Error writing json file:', err)
 	})
