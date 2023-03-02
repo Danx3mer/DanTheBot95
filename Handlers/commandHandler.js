@@ -35,11 +35,18 @@ function loadCommands(client) {
 			continue;
 		}
 	}
+	
 	client.application.commands.set(commandsArray);
 	try {
-		const developerGuild = client.guilds.cache.get(client.config.developerGuild);
-		if (developerArray.length > 0) developerGuild.commands.set(developerArray);
-	} catch (e) { console.log("ERROR: DEVELOPER COMMANDS NOT AVAILABLE (BOT IS NOT IN DEV SERVER)") }
+		for(devGuild = 0; devGuild < client.config.developerGuilds.length; devGuild++) {
+			const developerGuild = client.guilds.cache.get(client.config.developerGuilds[devGuild]);
+			
+			if (developerArray.length > 0) developerGuild.commands.set(developerArray);
+		}
+	} catch (e) {
+		console.error("ERROR: DEVELOPER COMMANDS NOT AVAILABLE (BOT IS NOT IN DEV SERVER)", e) 
+	}
+	
 	return console.log(table.toString(), `\nLoaded ${totalNumCommands} Commands.\n`);
 }
 

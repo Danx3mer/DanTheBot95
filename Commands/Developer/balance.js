@@ -3,11 +3,7 @@ const {
 	CommandInteraction
 } = require("discord.js");
 
-const createEmbed = require("../../Tools/Embed.js")
-const register = require("../../Economy/Tools/register.js");
-const checkRegister = require("../../Economy/Tools/checkForRegister.js");
-const getBalance = require("../../Economy/Tools/getBal.js");
-const lists = require("../../Economy/Tools/econLists.js");
+const tools = require("../../Tools/Tools.js");
 
 module.exports = {
 	developer: true,
@@ -35,19 +31,19 @@ module.exports = {
 		}
 
 		if (userID != interaction.member.id)
-			if (!checkRegister(userID))
+			if (!tools.economy.checkRegister(userID))
 				return interaction.reply(
 					{
 						embeds: [
-							createEmbed(`This user wasn't registered into the database yet, meaning that they didn't use this bot yet.`)]
+							tools.utility.createEmbed(`This user wasn't registered into the database yet, meaning that they didn't use this bot yet.`)]
 					})
 
-		register(userID);
-		var bal = getBalance(userID);
+		tools.economy.register(userID);
+		var bal = tools.economy.balance.get(userID);
 		return interaction.reply(
 			{
 				embeds: [
-					createEmbed(`Pocket Balance: ${lists.currencySymbol}${bal}`, `${userName}\'s BALANCE:`, "")]
+					tools.utility.createEmbed(`Pocket Balance: ${tools.economy.lists.currencySymbol}${bal}`, `${userName}\'s BALANCE:`, "")]
 			})
 	}
 };

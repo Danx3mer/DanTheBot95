@@ -16,7 +16,9 @@ module.exports = {
 					content: "This command is outdated/ no longer supported.",
 				});
 
-			command.execute(interaction, client);
+			try {
+				await command.execute(interaction, client);
+			} catch (e) { console.error("COMMAND ERROR", e) }
 		}
 		else if (interaction.isButton()) {
 			const { buttons } = client

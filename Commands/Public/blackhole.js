@@ -7,8 +7,7 @@ const {
 	Colors
 } = require("discord.js");
 
-const createEmbed = require("../../Tools/Embed.js")
-const createButton = require("../../Tools/Button.js")
+const tools = require("../../Tools/Tools.js");
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -24,7 +23,7 @@ module.exports = {
 			return interaction.reply(
 				{
 					embeds:
-						[createEmbed(`Stop Trying to Delete The Server`,
+						[tools.utility.createEmbed(`Stop Trying to Delete The Server`,
 							"ONLY THE SERVER OWNER COULD RELEASE A BLACK HOLE INTO THE SERVER!",
 							"",
 							"WARNING!!! THIS WILL DELETE ALL OF THE CHANNELS IN THE SERVER. THIS IS IRREVERSIBLE!!!",
@@ -34,13 +33,15 @@ module.exports = {
 		return interaction.reply(
 			{
 				embeds: [
-					createEmbed(`THIS ACTION IS IRREVERSIBLE!!!`,
+					tools.utility.createEmbed(`THIS ACTION IS IRREVERSIBLE!!!`,
 						"ARE YOU SURE THAT YOU WANT TO RELEASE A BLACK HOLE INTO THE SERVER?",
 						"",
 						"WARNING!!! THIS WILL DELETE ALL OF THE CHANNELS IN THE SERVER. THIS IS IRREVERSIBLE!!!",
-				Colors.Red)],
+						Colors.Red)],
 
-				components: [new ActionRowBuilder().addComponents(createButton("100% YES", "HoleYes", interaction.user.id, ButtonStyle.Danger), createButton("NO!!!", "HoleNo", interaction.user.id, ButtonStyle.Success))]
+				components: [new ActionRowBuilder().addComponents(
+					tools.utility.createButton("100% YES", "HoleYes", interaction.user.id, ButtonStyle.Danger),
+					tools.utility.createButton("NO!!!", "HoleNo", interaction.user.id, ButtonStyle.Success))]
 			});
 	}
 };

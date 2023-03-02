@@ -1,18 +1,18 @@
-const createEmbed = require("../../../Tools/Embed.js")
-const createButton = require("../../../Tools/Button.js")
 const { Colors, ActionRowBuilder, ButtonStyle } = require("discord.js")
+
+const tools = require("../../../Tools/Tools.js");
 
 module.exports = {
 	data: {
 		name: 'NukeYes'
 	},
-	async execute(interaction, client) {
+	async execute(interaction) {
 		try {
 			if (!interaction.channel.deletable)
 				throw new Error('Channel isn\'t deletable!')
-
+			
 			interaction.channel.clone().then(channel => {
-				var embed = createEmbed("CHANEL WAS NUKED!!! *RIP*. NUKER: <@" + interaction.member + ">.", "NUKE!!!", "", "Channel go boom lol.", Colors.Red, null, 'https://i.gifer.com/6Ip.gif')
+				var embed = tools.utility.createEmbed("CHANEL WAS NUKED!!! *RIP*. NUKER: <@" + interaction.member + ">.", "NUKE!!!", "", "Channel go boom lol.", Colors.Red, null, image)
 				channel.send({ embeds: [embed] })
 			});
 			interaction.channel.delete();
@@ -21,7 +21,9 @@ module.exports = {
 			await interaction.deferUpdate()
 			await interaction.editReply({
 				content: "`CANNOT NUKE THE CHANNEL!`",
-				components: [new ActionRowBuilder().addComponents(createButton("100% YES", "NukeYes_DISABLED", interaction.user.id, ButtonStyle.Danger).setDisabled(), createButton("NO!!!", "NukeNo_DISABLED", interaction.user.id, ButtonStyle.Success).setDisabled())]
+				components: [new ActionRowBuilder().addComponents(
+					tools.utility.createButton("100% YES", "NukeYes_DISABLED", interaction.user.id, ButtonStyle.Danger).setDisabled(),
+					tools.utility.createButton("NO!!!", "NukeNo_DISABLED", interaction.user.id, ButtonStyle.Success).setDisabled())]
 			})
 		}
 	}

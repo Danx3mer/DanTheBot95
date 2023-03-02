@@ -5,7 +5,7 @@ const {
 	PermissionFlagsBits
 } = require("discord.js");
 
-const createEmbed = require("../../Tools/Embed.js")
+const tools = require("../../Tools/Tools.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -32,13 +32,14 @@ module.exports = {
 		  .fetch(user.id)
 		  .catch(console.error)
 	  try {
+			if(!member.kickable) throw("not kickable");
 		  await member.kick(reason);
-		  interaction.reply({
-			  embeds: [createEmbed(`${user.tag} has been kicked! Reason: ${reason}`, "KICK!!!","","don\'t end up like them!")]
+		  return interaction.reply({
+			  embeds: [tools.utility.createEmbed(`${user.tag} has been kicked! Reason: ${reason}`, "KICK!!!","","don\'t end up like them!")]
 		  })
 	  } catch(e) {
-		  interaction.reply({
-			  embeds: [createEmbed(`${user.tag} couldn't be kicked!`, "Kick Error!!!","",":/", Colors.Yellow)]
+		  return interaction.reply({
+			  embeds: [tools.utility.createEmbed(`${user.tag} couldn't be kicked!`, "Kick Error!!!","",":/", Colors.Yellow)]
 		  })
 	  }
   },

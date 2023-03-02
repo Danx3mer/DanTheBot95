@@ -1,27 +1,28 @@
 const {
-  SlashCommandBuilder,
-  CommandInteraction,
-  ActionRowBuilder,
-  ButtonStyle
+	SlashCommandBuilder,
+	CommandInteraction,
+	ActionRowBuilder,
+	ButtonStyle
 } = require("discord.js");
 
-const createEmbed = require("../../Tools/Embed.js")
-const createButton = require("../../Tools/Button.js")
+const tools = require("../../Tools/Tools.js");
 
 module.exports = {
-  developer: true,
-  data: new SlashCommandBuilder()
-    .setName("buttontest")
-    .setDescription("testing buttons, 123"),
-  /**
-   *
-   * @param {CommandInteraction} interaction
-   */
-  execute(interaction) {
-      return interaction.reply(
-        { embeds: [
-        createEmbed(`henlo`, "button test: ", "", "BUTTONS YAY")], 
-         
-         components: [new ActionRowBuilder().addComponents(createButton("yes", "hello"),createButton("no", "hi",ButtonStyle.Secondary))]});
-    }
+	developer: true,
+	data: new SlashCommandBuilder()
+		.setName("buttontest")
+		.setDescription("testing buttons, 123"),
+	/**
+	 *
+	 * @param {CommandInteraction} interaction
+	 */
+	execute(interaction) {
+		return interaction.reply(
+			{
+				embeds: [
+					tools.utility.createEmbed(`henlo`, "button test: ", "", "BUTTONS YAY")],
+				components: [new ActionRowBuilder().addComponents(tools.utility.createButton("yes", "hello"),
+					tools.utility.createButton("no", "hi", ButtonStyle.Secondary))]
+			});
+	}
 };

@@ -7,7 +7,8 @@ const {
 const { loadCommands } = require("../../Handlers/commandHandler.js");
 const { loadEvents } = require("../../Handlers/eventHandler.js");
 const { loadComponents } = require("../../Handlers/componentHandler.js");
-const createEmbed = require("../../Tools/Embed.js")
+
+const tools = require("../../Tools/Tools.js");
 
 module.exports = {
 	developer: true,
@@ -41,7 +42,7 @@ module.exports = {
 					loadEvents(client);
 					console.log('The event handler has been reloaded')
 					return interaction.reply({
-						embeds: [createEmbed("The event handler has been reloaded!", "RELOADED!")]
+						embeds: [tools.utility.createEmbed("The event handler has been reloaded!", "RELOADED!")]
 					});
 				}
 			case "commands":
@@ -49,7 +50,7 @@ module.exports = {
 					loadCommands(client);
 					console.log('The command handler has been reloaded')
 					return interaction.reply({
-						embeds: [createEmbed("The command handler has been reloaded!", "RELOADED!")]
+						embeds: [tools.utility.createEmbed("The command handler has been reloaded!", "RELOADED!")]
 					});
 				}
 			case "components":
@@ -57,7 +58,7 @@ module.exports = {
 					loadComponents(client);
 					console.log('The component handler has been reloaded')
 					return interaction.reply({
-						embeds: [createEmbed("The component handler has been reloaded!", "RELOADED!")]
+						embeds: [tools.utility.createEmbed("The component handler has been reloaded!", "RELOADED!")]
 					});
 				}
 		}

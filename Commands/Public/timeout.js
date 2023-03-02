@@ -4,7 +4,7 @@ const {
 	PermissionFlagsBits
 } = require("discord.js");
 
-const createEmbed = require("../../Tools/Embed.js")
+const tools = require("../../Tools/Tools.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -42,11 +42,11 @@ module.exports = {
 			let isThereAnS = ''
 		  if(time == 60 * 1000) isThereAnS='s'
 		  	interaction.reply({
-			  embeds: [createEmbed(`${user.tag} has been timed out for ${time} Minute${isThereAnS}! Reason: ${reason}`, "TIMEOUT!!!","","don\'t end up like them!")]
+			  embeds: [tools.utility.createEmbed(`${user.tag} has been timed out for ${time} Minute${isThereAnS}! Reason: ${reason}`, "TIMEOUT!!!","","don\'t end up like them!")]
 		  })
 	  } catch(e) {
 		  interaction.reply({
-			  embeds: [createEmbed(`${user.tag} couldn't be timed out!`, "Timeout Error!!!","",":/")]
+			  embeds: [tools.utility.createEmbed(`${user.tag} couldn't be timed out!`, "Timeout Error!!!","",":/")]
 		  })
 	  }
   },

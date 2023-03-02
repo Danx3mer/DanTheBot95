@@ -4,7 +4,7 @@ const {
 	PermissionFlagsBits
 } = require("discord.js");
 
-const createEmbed = require("../../Tools/Embed.js")
+const tools = require("../../Tools/Tools.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -29,11 +29,11 @@ module.exports = {
 		  await member.timeout(null);
 		  
 		  	interaction.reply({
-			  embeds: [createEmbed(`${user.tag} has been untimed out!`, "UNTIMEOUT!!!","","don\'t be like them in the first place!")]
+			  embeds: [tools.utility.createEmbed(`${user.tag} has been untimed out!`, "UNTIMEOUT!!!","","don\'t be like them in the first place!")]
 		  })
 	  } catch(e) {
 		  interaction.reply({
-			  embeds: [createEmbed(`${user.tag} couldn't be untimed out!`, "Untimeout Error!!!","",":/")]
+			  embeds: [tools.utility.createEmbed(`${user.tag} couldn't be untimed out!`, "Untimeout Error!!!","",":/")]
 		  })
 	  }
   },

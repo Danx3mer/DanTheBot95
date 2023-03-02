@@ -3,7 +3,7 @@ const {
   CommandInteraction,
 } = require("discord.js");
 
-const createEmbed = require("../../Tools/Embed.js")
+const tools = require("../../Tools/Tools.js");
 
 module.exports = {
   developer: true,
@@ -16,6 +16,6 @@ module.exports = {
    */
   execute(interaction) {
       return interaction.reply({ embeds: [
-        createEmbed(`Da Docs: https://discordjs.guide/`, "DJS V14 Docs: ", "", "We all know the docs are poggers ;)")] });
+        tools.utility.createEmbed(`Da Docs: https://discordjs.guide/`, "DJS V14 Docs: ", "", "We all know the docs are poggers ;)")] });
     }
 };

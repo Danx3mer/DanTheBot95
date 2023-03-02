@@ -4,7 +4,7 @@ const {
 	PermissionFlagsBits
 } = require("discord.js");
 
-const createEmbed = require("../../Tools/Embed.js")
+const tools = require("../../Tools/Tools.js");
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -50,7 +50,7 @@ module.exports = {
 			interaction.channel.bulkDelete(messagesToDel, true).then((messages) => {
 				interaction.reply({
 					embeds: [
-						createEmbed(`CLEARED THE CHANNEL OF ${i} MESSAGES MADE BY ${user.tag}. Reason: ${reason}`,
+						tools.utility.createEmbed(`CLEARED THE CHANNEL OF ${i} MESSAGES MADE BY ${user.tag}. Reason: ${reason}`,
 							"CHANNEL CLEARED!", "", `Action taken by <@${interaction.user.tag}>`)
 					]
 				})
@@ -61,7 +61,7 @@ module.exports = {
 			interaction.channel.bulkDelete(messages, true).then(() => {
 				interaction.reply({
 					embeds: [
-						createEmbed(`CLEARED THE CHANNEL OF ${messages} MESSAGES. Reason: ${reason}`,
+						tools.utility.createEmbed(`CLEARED THE CHANNEL OF ${messages} MESSAGES. Reason: ${reason}`,
 							"CHANNEL CLEARED!", "", `Action taken by ${interaction.user.tag}`)
 					]
 				})

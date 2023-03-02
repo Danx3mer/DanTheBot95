@@ -4,8 +4,7 @@ const {
 	Colors
 } = require("discord.js");
 
-const createEmbed = require("../../Tools/Embed.js")
-const readFromJson = require("../../Tools/ReadJson.js")
+const tools = require("../../Tools/Tools.js");
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -16,11 +15,10 @@ module.exports = {
 	 * @param {CommandInteraction} interaction
 	 */
 	execute(interaction) {
-
-		const version = readFromJson("../config.json", "version")
+		const version = tools.utility.json.read("config.json", "version")
 		
 		return interaction.reply({
-			embeds: [createEmbed("**(All Commands)**", "Commands:", "", `Bot Version: ${version}`, Colors.Blue, [
+			embeds: [tools.utility.createEmbed("**(All Commands)**", "Commands:", "", `Bot Version: ${version}`, Colors.Blue, [
 				//Add a field for each command that will be added
 				[{
 					name: "</help:1063228351252275250>",

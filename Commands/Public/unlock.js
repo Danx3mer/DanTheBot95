@@ -5,7 +5,7 @@ const {
 	PermissionFlagsBits
 } = require("discord.js");
 
-const createEmbed = require("../../Tools/Embed.js")
+const tools = require("../../Tools/Tools.js");
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -26,7 +26,7 @@ module.exports = {
 		if (channel.permissionsFor(interaction.guild.id).has(PermissionFlagsBits.SendMessages))
 			return interaction.reply({
 				embeds:
-					[createEmbed("The channel isn\'t locked!", "Not Locked!", "", "", Colors.Yellow)]
+					[tools.utility.createEmbed("The channel isn\'t locked!", "Not Locked!", "", "", Colors.Yellow)]
 				, ephemeral: true
 			});
 
@@ -35,7 +35,7 @@ module.exports = {
 		});
 		return interaction.reply({
 			embeds:
-				[createEmbed(`${channel} has been unlocked!`, "Unlocked!", "", "", Colors.Green)]
+				[tools.utility.createEmbed(`${channel} has been unlocked!`, "Unlocked!", "", "", Colors.Green)]
 		})
 	},
 };

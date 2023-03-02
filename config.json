@@ -1,7 +1,10 @@
 {
   "owner": "795416175034630144",
-  "timesStarted": 525,
-  "developerGuild": "1029591111309721650",
+  "timesStarted": 582,
+  "developerGuilds": [
+    "1029591111309721650",
+    "969712976502337578"
+  ],
   "statusChannel": "1063206602263511091",
-  "version": "0.7 PRERELEASE"
+  "version": "0.7_B PRERELEASE 2"
 }

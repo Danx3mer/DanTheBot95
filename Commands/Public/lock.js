@@ -5,7 +5,7 @@ const {
 	PermissionFlagsBits
 } = require("discord.js");
 
-const createEmbed = require("../../Tools/Embed.js")
+const tools = require("../../Tools/Tools.js");
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -19,9 +19,9 @@ module.exports = {
 			option.setName('reason')
 				.setDescription('The reason that you want to lock the channel down.')),
 	/**
-   *
-   * @param {CommandInteraction} interaction
-   */
+	 *
+	 * @param {CommandInteraction} interaction
+	 */
 	execute(interaction) {
 		const channel = interaction.options.getChannel('channel') || interaction.channel;
 		const reason = interaction.options.getString('reason') || "No reason";
@@ -29,7 +29,7 @@ module.exports = {
 		if (!channel.permissionsFor(interaction.guild.id).has(PermissionFlagsBits.SendMessages))
 			return interaction.reply({
 				embeds:
-					[createEmbed("The channel is already locked!", "Already Locked!", "", "", Colors.Yellow)]
+					[tools.utility.createEmbed("The channel is already locked!", "Already Locked!", "", "", Colors.Yellow)]
 				, ephemeral: true
 			});
 
@@ -38,7 +38,7 @@ module.exports = {
 		});
 		return interaction.reply({
 			embeds:
-				[createEmbed(`${channel} has been locked! Reason: ${reason}`, "Locked!", "", "", Colors.Red)]
+				[tools.utility.createEmbed(`${channel} has been locked! Reason: ${reason}`, "Locked!", "", "", Colors.Red)]
 		})
 	},
 };

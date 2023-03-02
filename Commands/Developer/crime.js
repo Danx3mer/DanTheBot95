@@ -3,11 +3,7 @@ const {
 	CommandInteraction
 } = require("discord.js");
 
-const createEmbed = require("../../Tools/Embed.js")
-const checkRegister = require("../../Economy/Tools/checkForRegister.js");
-const register = require("../../Economy/Tools/register.js");
-const setBal = require("../../Economy/Tools/updateBal.js");
-const lists = require("../../Economy/Tools/econLists.js");
+const tools = require("../../Tools/Tools.js");
 
 module.exports = {
 	developer: true,
@@ -21,27 +17,27 @@ module.exports = {
 	execute(interaction) {
 		const UID = interaction.member.id
 		do {
-			register(UID);
-		} while(!checkRegister(UID));
-		
+			tools.economy.register(UID);
+		} while (!tools.economy.checkRegister(UID));
+
 		let res = Math.round(Math.random() * 400) - 200
-		setBal(UID, res, false)
-		
+		tools.economy.balance.set(UID, res, false)
+
 		let desc = ``
 		let title = ``
 		let footer = ""
-		
-		let crime = lists.getRandomCrime(res>0)
+
+		let crime = tools.economy.lists.getRandomCrime(res > 0)
 		let crimeName = Object.keys(crime)[0]
 		let crimeReason = Object.values(crime)[0]
-		
-		if(res<0) {
-			desc = `You failed to commit ${crimeName} because ${crimeReason}, and lost ${lists.currencySymbol}${Math.abs(res)}`
+
+		if (res < 0) {
+			desc = `You failed to commit ${crimeName} because ${crimeReason}, and lost ${tools.economy.lists.currencySymbol}${Math.abs(res)}`
 			title = `${interaction.member.user.username}\'s failure at ${crimeName}`
 			footer = "YOU LITTLE FAILURE"
 		}
-		else if(res>0) {
-			desc = `You succeded in committing ${crimeName} because ${crimeReason}, and somehow got ${lists.currencySymbol}${Math.abs(res)}`
+		else if (res > 0) {
+			desc = `You succeded in committing ${crimeName} because ${crimeReason}, and somehow got ${tools.economy.lists.currencySymbol}${Math.abs(res)}`
 			title = `${interaction.member.user.username}\'s success at ${crimeName}`
 			footer = "Wait... but thats illegal isn't it?"
 		}
@@ -50,17 +46,10 @@ module.exports = {
 			title = `${interaction.member.user.username}\'s wierd crime`
 			footer = "This is rare wow"
 		}
-		
-		/*return interaction.reply(
-			{
-				embeds: [
-					createEmbed(`Result of crime: ${sign}${res}`, `${interaction.member.user.username}\'s crime results:`,
-						"", "Wait... but thats illegal isn't it?")]
-			})*/
-		
+
 		return interaction.reply({
-				embeds: [createEmbed(desc, title, "", footer)]
-			}
+			embeds: [tools.utility.createEmbed(desc, title, "", footer)]
+		}
 		)
 	}
 };
