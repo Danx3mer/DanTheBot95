@@ -12,7 +12,7 @@
   "dependencies": {
     "@types/node": "^20.12.12",
     "ascii-table": "^0.0.9",
-    "discord.js": "^14.15.2",
+    "discord.js": "^14.15.3",
     "express": "^4.19.2",
     "node-fetch": "^3.3.2"
   }

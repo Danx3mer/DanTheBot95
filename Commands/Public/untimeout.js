@@ -13,7 +13,7 @@ module.exports = {
 	  .setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild)
 	.addUserOption(option => 
 		option.setName('member')
-		.setDescription("The member to be timed out.")
+		.setDescription("The member to have their timeout removed.")
 		.setRequired(true)),
 	/**
    *
@@ -29,11 +29,11 @@ module.exports = {
 		  await member.timeout(null);
 		  
 		  	interaction.reply({
-			  embeds: [createEmbed(`${user.tag} has been untimed out!`, "UNTIMEOUT!!!","","don\'t be like them in the first place!")]
+			  embeds: [createEmbed(`${user.tag} has was taken out of timeout!`, "UNTIMEOUT!!!","","don\'t be like them in the first place!")]
 		  })
 	  } catch(e) {
 		  interaction.reply({
-			  embeds: [createEmbed(`${user.tag} couldn't be untimed out!`, "Untimeout Error!!!","",":/")]
+			  embeds: [createEmbed(`${user.tag} couldn't be taken out of timeout!`, "Untimeout Error!!!","",":/")]
 		  })
 	  }
   },

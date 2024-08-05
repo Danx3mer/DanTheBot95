@@ -22,7 +22,7 @@ client.buttons = new Collection();
 client.config = require("./config.json")
 
 client
-  .login(process.env['BOT_TOKEN'])
+  .login(process.env['AUGMENTATION_TOKEN'])
   .then(() => {
     loadEvents(client);
     loadCommands(client);
@@ -32,7 +32,7 @@ client
 
 const express = require('express')
 const app = express();
-const port = 3000;
+const port = 30000;
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })

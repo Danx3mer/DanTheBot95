@@ -1,6 +1,6 @@
-const { Client, ActivityType, Colors } = require("discord.js");
+const { Client, ActivityType, Colors, ApplicationCommandType, Routes } = require("discord.js");
 
-let activities = [`Danx3mer.github.io`, `for V0.7_B (soon?)`]
+let activities = [`Danx3mer.github.io`, `Fun stuff`]
 	, i = 0;
 
 const jsonWrite = require("../../Tools/WriteJson.js")

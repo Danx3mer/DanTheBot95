@@ -1,3 +1,5 @@
+const { SlashCommandBuilder } = require("@discordjs/builders");
+
 function loadCommands(client) {
   let totalNumCommands = 0
   const ascii = require("ascii-table");
@@ -15,22 +17,26 @@ function loadCommands(client) {
 
     for (const file of commandFiles) {
       const commandFile = require(`../Commands/${folder}/${file}`);
-	if(commandFile.inDev) {
-		if(folder == "Generic_Test_Other") table.addRow(file, "🔵 Generic (Never gonna be released)");
-		else table.addRow(file, "🔴 Indev (Not released at all)");
-		continue
-	}
+      if (commandFile.inDev) {
+        if (folder == "Generic_Test_Other") table.addRow(file, "🔵 Generic (Never gonna be released)");
+        else table.addRow(file, "🔴 Indev (Not released at all)");
+        continue
+      }
       else ++totalNumCommands
       client.commands.set(commandFile.data.name, commandFile);
 
-      if (commandFile.developer){
-		  developerArray.push(commandFile.data.toJSON());
-      	table.addRow(file, "🟡 In Testing Mode (Only available on dev servers)");
-	  }
+      if (commandFile.developer) {
+        if (commandFile.data instanceof SlashCommandBuilder)
+          developerArray.push(commandFile.data.toJSON());
+        else commandsArray.push(commandFile.data);
+        table.addRow(file, "🟡 In Testing Mode (Only available on dev servers)");
+      }
       else {
-		  commandsArray.push(commandFile.data.toJSON());
-      table.addRow(file, "🟢 Public!");
-	  }
+        if (commandFile.data instanceof SlashCommandBuilder)
+          commandsArray.push(commandFile.data.toJSON());
+        else commandsArray.push(commandFile.data);
+        table.addRow(file, "🟢 Public!");
+      }
 
       continue;
     }
@@ -38,7 +44,11 @@ function loadCommands(client) {
   client.application.commands.set(commandsArray);
 
   const developerGuild = client.guilds.cache.get(client.config.developerGuild);
-  if(developerArray.length > 0) developerGuild.commands.set(developerArray);
+  if (developerArray.length > 0) {
+    try {
+      developerGuild.commands.set(developerArray);
+    } catch (error) { console.error("App is not in dev guild!\n") }
+  }
 
   return console.log(table.toString(), `\nLoaded ${totalNumCommands} Commands.\n`);
 }

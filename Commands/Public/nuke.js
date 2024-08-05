@@ -12,7 +12,7 @@ const createButton = require("../../Tools/Button.js")
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("nuke")
-    .setDescription("NUKE DA CHANNEL!!!")
+    .setDescription("NUKE THE CHANNEL!!!")
 	.setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
   /**
    *

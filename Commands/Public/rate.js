@@ -35,7 +35,7 @@ module.exports = {
       case "brain":
         {
           interaction.reply({
-            embeds: [createEmbed("You have " + (Math.floor(Math.random() * 101) + 1) + " brain cells !!!", "Brain Ratings:", "", "How're you so smart? I have -5 :/")],
+            embeds: [createEmbed("You have " + (Math.floor(Math.random() * 101) + 1) + " brain cells !!!", "Brain Ratings:", "", "How're you so smart? I have -5 :/ (I'm very smart fr)")],
           });
         }
         break;

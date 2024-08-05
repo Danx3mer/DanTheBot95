@@ -7,11 +7,11 @@ module.exports = {
 	inDev: true,
 	developer: true,
   data: new SlashCommandBuilder()
-    .setName("ban")
-    .setDescription("Bans a member.")
+    .setName("unban")
+    .setDescription("Unbans a member.")
 	.addUserOption(option => 
 		option.setName('member')
-		.setDescription("The member to be banned.")
+		.setDescription("The member to be unbanned.")
 		.setRequired(true))
 	  
 	.addStringOption(option =>
